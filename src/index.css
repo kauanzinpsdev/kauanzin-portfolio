@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #050505;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink font-sans text-white antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(34, 211, 238, 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #22d3ee;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Vidro discreto: fundo translúcido, blur e borda sutil */
+  .glass {
+    @apply border border-white/10 bg-white/[0.035] backdrop-blur-md;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .section-pad {
+    @apply py-20 sm:py-28;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Camada promovida para a GPU (parallax / movimento de câmera) */
+  .gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+/* Vídeo de fundo: nunca mostrar controles nem o botão de "play" do Safari (modo de baixa energia). */
+video::-webkit-media-controls,
+video::-webkit-media-controls-start-button,
+video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+}
